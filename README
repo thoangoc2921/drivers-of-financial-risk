@@ -28,6 +28,8 @@ Các tổ chức tín dụng phải đối mặt với thách thức xác địn
 ---
 
 ## 4. Repository Structure
+
+```
 drivers-of-financial-risk/
 ├── queries/
 │   └── loan_analysis.sql          # SQL query phân tích theo năm và approval status
@@ -41,9 +43,12 @@ drivers-of-financial-risk/
 │   └── yoy_trend_page.png
 └── README.md
 
+```
 ---
 
 ## 5. Data Workflow
+
+```
 Raw Data (Loan.csv — 20,000 records, 36 columns)
 ↓
 [MySQL] GROUP BY year + approval_status → avg income, assets, liabilities, DTI, job tenure
@@ -54,6 +59,7 @@ Raw Data (Loan.csv — 20,000 records, 36 columns)
 ↓
 [Power BI] Xây dựng 3-page dashboard với filter: Year, Credit Tier, Approval Label
 
+```
 ---
 
 ## 6. Data Model & Schema
