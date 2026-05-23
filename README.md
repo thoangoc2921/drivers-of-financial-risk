@@ -264,7 +264,7 @@ Năm 2055 có Approval Rate cao nhất (~31%) và một số năm xuống dướ
 ## 12. Deliverables
 
 - ✅ `queries/loan_analysis.sql` — Toàn bộ queries: phân tích theo năm × approval status, phân tầng Credit Tier
-- ✅ `data/raw/Loan.csv` — Dataset gốc (20,000 records, 36 columns)
+- ✅  Dataset gốc: `Loan.csv` (20,000 bản ghi, 36 cột) — tải tại [Kaggle](https://www.kaggle.com/datasets/lorenzozoppelletto/financial-risk-for-loan-approval)
 - ✅ `reports/Drivers_of_financial_risk.pdf` — Export Power BI dashboard (3 trang)
 - ✅ `README.md` — Tài liệu project đầy đủ
 ---
