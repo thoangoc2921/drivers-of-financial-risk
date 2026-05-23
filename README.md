@@ -272,13 +272,17 @@ Năm 2055 có Approval Rate cao nhất (~31%) và một số năm xuống dướ
 ## 13. Dashboard Preview
 
 ### Trang 1 — Summary
-![Summary](visuals/summary.png)
+
+![Summary](visuals/dashboard_summary.png)
 
 ### Trang 2 — Risk Factors
-![Risk Factors](visuals/risk_factors.png)
+
+![Risk Factors](visuals/dashboard_risk_factors.png)
 
 ### Trang 3 — YoY Trend
-![YoY Trend](visuals/yoy_trend.png)
+
+![YoY Trend](visuals/dashboard_yoy_trend.png)
+
 ---
 
 ## 14. Author
