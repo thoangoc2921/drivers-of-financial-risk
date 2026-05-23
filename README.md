@@ -41,18 +41,14 @@ Kết quả là một dashboard cho phép đội ngũ chính sách tín dụng k
 
 ## 4. Repository Structure
 
-```text
-drivers-of-financial-risk/
+```drivers-of-financial-risk/
 ├── queries/
-│   ├── exploratory/
-│   │   └── loan_analysis.sql               # Phân tích theo năm × approval status
-│   └── transformations/
-│       └── credit_tier_classification.sql  # Phân tầng Credit Tier từ CreditScore
+│   └── loan_analysis.sql        # Phân tích theo năm × approval status + phân tầng Credit Tier
 ├── data/
 │   └── raw/
-│       └── Loan.csv                        # Dataset gốc (20,000 records, 36 columns)
+│       └── Loan.csv             # Dataset gốc (20,000 records, 36 columns)
 ├── reports/
-│   └── Drivers_of_financial_risk.pdf       # Export Power BI dashboard (3 trang)
+│   └── Drivers_of_financial_risk.pdf  # Export Power BI dashboard (3 trang)
 ├── visuals/
 │   ├── summary_page.png
 │   ├── risk_factors_page.png
@@ -69,14 +65,9 @@ Raw Data
 └── Loan.csv (20,000 records × 36 columns — Kaggle synthetic dataset)
         │
         ▼
-[MySQL — Exploratory Query]
-    GROUP BY year × approval_status
-    → avg income, assets, liabilities, DTI, savings, job tenure
-        │
-        ▼
-[MySQL — Transformation Query]
-    CASE WHEN CreditScore → Credit Tier (5 nhóm: Excellent → Very Poor)
-    → approval count, avg income by Tier
+[MySQL — loan_analysis.sql]
+    Query 1: GROUP BY year × approval_status → avg income, assets, DTI...
+    Query 2: CASE WHEN CreditScore → Credit Tier (5 nhóm)
         │
         ▼
 [Power BI — Import & Model]
@@ -272,15 +263,25 @@ Năm 2055 có Approval Rate cao nhất (~31%) và một số năm xuống dướ
 
 ## 12. Deliverables
 
-- ✅ `queries/exploratory/loan_analysis.sql` — Phân tích theo năm × approval status
-- ✅ `queries/transformations/credit_tier_classification.sql` — Phân tầng Credit Tier
+- ✅ `queries/loan_analysis.sql` — Toàn bộ queries: phân tích theo năm × approval status, phân tầng Credit Tier
 - ✅ `data/raw/Loan.csv` — Dataset gốc (20,000 records, 36 columns)
 - ✅ `reports/Drivers_of_financial_risk.pdf` — Export Power BI dashboard (3 trang)
 - ✅ `README.md` — Tài liệu project đầy đủ
-
 ---
 
-## 13. Author
+## 13. Dashboard Preview
+
+### Trang 1 — Summary
+![Summary](visuals/summary.png)
+
+### Trang 2 — Risk Factors
+![Risk Factors](visuals/risk_factors.png)
+
+### Trang 3 — YoY Trend
+![YoY Trend](visuals/yoy_trend.png)
+---
+
+## 14. Author
 
 **Phan Ngoc Kim Thoa**
 
