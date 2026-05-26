@@ -1,17 +1,16 @@
 # 📊 Drivers of Financial Risk | SQL + Power BI
 
-> **76% hồ sơ vay bị từ chối — nhưng điều gì thực sự quyết định kết quả đó?**
-> Project phân tích 20,000 hồ sơ vay để xác định các yếu tố tài chính thực sự phân biệt hồ sơ được duyệt và bị từ chối — kết quả cho thấy thu nhập có sức ảnh hưởng lớn hơn Credit Score rất nhiều, trong khi DTI (thường được coi là chỉ số quan trọng) lại không có bất kỳ sự khác biệt nào giữa hai nhóm.
-
 ---
 
 ## 1. Project Overview
 
-Các tổ chức tín dụng thường xuyên từ chối phần lớn hồ sơ vay, nhưng tiêu chí đằng sau những quyết định đó thường không minh bạch — ngay cả trong nội bộ. Nếu không hiểu rõ tín hiệu tài chính nào thực sự quyết định việc phê duyệt, người cho vay đối mặt với hai rủi ro đồng thời: chấp thuận hồ sơ rủi ro cao và từ chối hồ sơ có khả năng trả nợ tốt.
+**76% đơn xin vay bị từ chối, nhưng điều gì thực sự quyết định kết quả?**
 
-Project phân tích 20,000 hồ sơ vay tổng hợp trong giai đoạn 2018–2072 để trả lời một câu hỏi kinh doanh cốt lõi: **yếu tố tài chính nào phân biệt rõ nhất giữa hồ sơ được duyệt và bị từ chối?** Sử dụng MySQL để tính toán tổng hợp theo nhóm và Power BI để xây dựng dashboard tương tác 3 trang, phân tích cho thấy một phát hiện đáng chú ý — thu nhập giải thích khoảng cách phê duyệt nhiều hơn Credit Score rất nhiều, trong khi DTI (một chỉ số thường được trích dẫn) lại bằng nhau hoàn toàn giữa hai nhóm.
+Dự án này đã phân tích 20.000 đơn xin vay để xác định các yếu tố tài chính quan trọng thực sự phân biệt hồ sơ được chấp thuận và bị từ chối. Phân tích cho thấy thu nhập có ảnh hưởng mạnh mẽ hơn nhiều đến quyết định chấp thuận so với điểm tín dụng, trong khi tỷ lệ nợ trên thu nhập (DTI), thường được coi là một chỉ số quan trọng, lại không có sự khác biệt giữa hai nhóm.
 
-Kết quả là một dashboard cho phép đội ngũ chính sách tín dụng kiểm tra các pattern phê duyệt theo năm, Credit Tier và trạng thái phê duyệt — cùng với các khuyến nghị dựa trên dữ liệu thực tế, không phải giả định thông thường.
+Các tổ chức tín dụng thường xuyên từ chối một lượng lớn đơn xin vay, nhưng tiêu chí đằng sau những quyết định này thường không rõ ràng. Nếu không hiểu rõ tín hiệu tài chính nào thực sự thúc đẩy việc chấp thuận, người cho vay phải đối mặt với hai rủi ro lớn cùng một lúc. Họ có thể chấp thuận những người vay có rủi ro cao và cũng từ chối những người nộp đơn có khả năng trả nợ tốt.
+
+Sử dụng MySQL để tổng hợp dữ liệu và bảng điều khiển Power BI tương tác ba trang, dự án này đã cung cấp những hiểu biết rõ ràng về các mô hình chấp thuận theo năm, bậc tín dụng và trạng thái chấp thuận, cùng với các khuyến nghị dựa trên dữ liệu để cải thiện chính sách cho vay dựa trên bằng chứng thực tế chứ không phải các giả định thông thường.
 
 ---
 
