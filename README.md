@@ -4,50 +4,51 @@
 
 ## 1. Project Overview
 
-**76% đơn xin vay bị từ chối, nhưng điều gì thực sự quyết định kết quả?**
+**76% of loan applications were declined, but what actually determines the outcome?**
 
-Dự án này đã phân tích 20.000 đơn xin vay để xác định các yếu tố tài chính quan trọng thực sự phân biệt hồ sơ được chấp thuận và bị từ chối. Phân tích cho thấy thu nhập có ảnh hưởng mạnh mẽ hơn nhiều đến quyết định chấp thuận so với điểm tín dụng, trong khi tỷ lệ nợ trên thu nhập (DTI), thường được coi là một chỉ số quan trọng, lại không có sự khác biệt giữa hai nhóm.
+This project analyzed 20,000 loan applications to identify the key financial factors that genuinely distinguish approved applicants from declined ones. The analysis reveals that income has a far stronger influence on approval decisions than credit score, while the debt-to-income ratio, commonly regarded as a critical indicator, shows no meaningful difference between the two groups.
 
-Các tổ chức tín dụng thường xuyên từ chối một lượng lớn đơn xin vay, nhưng tiêu chí đằng sau những quyết định này thường không rõ ràng. Nếu không hiểu rõ tín hiệu tài chính nào thực sự thúc đẩy việc chấp thuận, người cho vay phải đối mặt với hai rủi ro lớn cùng một lúc. Họ có thể chấp thuận những người vay có rủi ro cao và cũng từ chối những người nộp đơn có khả năng trả nợ tốt.
+Lending institutions regularly decline a large volume of loan applications, yet the criteria behind those decisions are often unclear. Without a clear understanding of which financial signals actually drive approvals, lenders face two major risks at the same time: approving high-risk borrowers while also declining applicants who are fully capable of repayment.
 
-Sử dụng MySQL để tổng hợp dữ liệu và bảng điều khiển Power BI tương tác ba trang, dự án này đã cung cấp những hiểu biết rõ ràng về các mô hình chấp thuận theo năm, bậc tín dụng và trạng thái chấp thuận, cùng với các khuyến nghị dựa trên dữ liệu để cải thiện chính sách cho vay dựa trên bằng chứng thực tế chứ không phải các giả định thông thường.
+Using MySQL for data aggregation and a three-page interactive Power BI dashboard, this project delivers clear insights into approval patterns across years, credit risk tiers, and loan approval outcomes, along with data-driven recommendations for improving lending policy based on actual evidence rather than conventional assumptions.
 
 ---
 
 ## 2. Objectives
 
-- Xác định biến tài chính nào (thu nhập, Credit Score, DTI, tài sản, nợ phải trả, tiết kiệm, thâm niên làm việc) phân biệt rõ nhất giữa hồ sơ được duyệt và bị từ chối
-- Định lượng khoảng cách phê duyệt qua 5 Credit Tier (Excellent → Very Poor) để xác định liệu Credit Score đơn lẻ có đủ để dự đoán kết quả không
-- Theo dõi thay đổi Approval Rate theo từng năm (2018–2072) để phát hiện thay đổi chính sách hoặc các chu kỳ biến động
-- Xây dựng Power BI dashboard tương tác 3 trang với filter theo Year, Credit Tier và Approval Label
-- Ghi nhận các vấn đề chất lượng dữ liệu (ví dụ: DTI bằng nhau giữa 2 nhóm) cần được điều tra trước khi mô hình có thể được tin cậy cho các quyết định chính sách
+- Identify which financial variables (income, credit score, debt-to-income ratio, assets, liabilities, savings, and job tenure) most clearly distinguish approved applicants from declined ones
+- Quantify the approval gap across five credit risk tiers (Excellent down to Very Poor) to determine whether credit score alone is sufficient to predict loan outcomes
+- Track changes in loan approval rate year by year (2018 to 2072) to detect policy shifts or cyclical patterns
+- Build a three-page interactive Power BI dashboard with filters by Year, Credit Risk Tier, and Loan Approval Outcome
+- Document data quality issues (for example, the identical debt-to-income ratio across both groups) that require investigation before the model can be trusted for policy decisions
 
 ---
 
 ## 3. Project Scope & Tools
 
-| Hạng mục | Chi tiết |
+| Component | Details |
 |----------|----------|
-| **Dataset** | 20,000 hồ sơ vay — 1 bảng `loan`, 36 cột |
-| **Nguồn dữ liệu** | Dataset tổng hợp (Kaggle) — mô phỏng hành vi tín dụng, không phải dữ liệu thực tế |
-| **Thời gian dữ liệu** | 2018–2072 |
-| **SQL** | MySQL — GROUP BY year × approval_status, tính average các chỉ số tài chính, phân tầng Credit Tier |
-| **Visualization** | Power BI Desktop — 3 trang: Summary / Risk Factors / YoY Trend |
-| **DAX** | Approval Rate, PY Approval Rate, YoY Approval Rate Change |
-| **File output** | `.sql`, `.csv`, `.pdf` (export dashboard) |
+| **Dataset** | 20,000 loan applications, stored in 1 table named `loan` with 36 columns |
+| **Data source** | Synthetic dataset from Kaggle, simulating credit behavior rather than reflecting real-world data |
+| **Data period** | 2018 to 2072 |
+| **SQL** | MySQL, covering GROUP BY year combined with approval status, average calculations for financial indicators, and credit risk tier classification |
+| **Visualization** | Power BI Desktop, with 3 pages: Summary, Risk Factors, and YoY Trend |
+| **DAX** | Approval Rate, PY Approval Rate, and YoY Approval Rate Change |
+| **Output files** | `.sql`, `.csv`, and `.pdf` (dashboard export) |
 
 ---
 
 ## 4. Repository Structure
 
-```drivers-of-financial-risk/
+```
+drivers-of-financial-risk/
 ├── queries/
-│   └── loan_analysis.sql        # Phân tích theo năm × approval status + phân tầng Credit Tier
+│   └── loan_analysis.sql        # Analysis by year combined with approval status, plus credit risk tier classification
 ├── data/
 │   └── raw/
-│       └── Loan.csv             # Dataset gốc (20,000 records, 36 columns)
+│       └── Loan.csv             # Original dataset (20,000 records, 36 columns)
 ├── reports/
-│   └── Drivers_of_financial_risk.pdf  # Export Power BI dashboard (3 trang)
+│   └── Drivers_of_financial_risk.pdf  # Power BI dashboard export (3 pages)
 ├── visuals/
 │   ├── summary_page.png
 │   ├── risk_factors_page.png
@@ -61,53 +62,53 @@ Sử dụng MySQL để tổng hợp dữ liệu và bảng điều khiển Powe
 
 ```text
 Raw Data
-└── Loan.csv (20,000 records × 36 columns — Kaggle synthetic dataset)
+└── Loan.csv (20,000 records × 36 columns, Kaggle synthetic dataset)
         │
         ▼
 [MySQL — loan_analysis.sql]
-    Query 1: GROUP BY year × approval_status → avg income, assets, DTI...
-    Query 2: CASE WHEN CreditScore → Credit Tier (5 nhóm)
+    Query 1: GROUP BY year combined with approval status, computing averages for income, assets, debt-to-income ratio, and other indicators
+    Query 2: CASE WHEN CreditScore → Credit Risk Tier (5 groups)
         │
         ▼
 [Power BI — Import & Model]
-    Tạo cột Approval Label
-    Tính DAX measures: Approval Rate, PY Approval Rate, YoY Change
+    Create Approval Label column
+    Calculate DAX measures: Approval Rate, PY Approval Rate, YoY Change
         │
         ▼
 [Power BI — Dashboard]
-    Trang 1: Summary (KPI cards + Approval Rate theo từng năm)
-    Trang 2: Risk Factors (phân tích Credit Tier + so sánh Approved vs Declined)
-    Trang 3: YoY Trend (bảng theo từng năm + đường xu hướng so với trung bình)
-    Filters: Year slicer, Credit Tier, Approval Label
+    Page 1: Summary (KPI cards and loan approval rate by year)
+    Page 2: Risk Factors (credit risk tier analysis and comparison between approved and declined applicants)
+    Page 3: YoY Trend (year-by-year table and trend line against the overall average)
+    Filters: Year slicer, Credit Risk Tier, Loan Approval Outcome
 ```
 
 ---
 
 ## 6. Data Model & Schema
 
-**Bảng duy nhất:** `yt_data.loan` — không có join, không có ERD
+**Single table:** `yt_data.loan`, with no joins and no ERD
 
-| Cột | Kiểu | Mô tả |
+| Column | Type | Description |
 |-----|------|-------|
-| `ApplicationDate` | DATE | Ngày nộp hồ sơ vay |
-| `Age` | INT | Tuổi người vay |
-| `AnnualIncome` | INT | Thu nhập hàng năm (USD) |
-| `CreditScore` | INT | Điểm tín dụng (403–750+) |
-| `EmploymentStatus` | VARCHAR | Tình trạng việc làm |
-| `EducationLevel` | VARCHAR | Trình độ học vấn |
-| `LoanAmount` | INT | Số tiền vay (USD) |
-| `LoanDuration` | INT | Thời hạn vay (tháng) |
-| `DebtToIncomeRatio` | FLOAT | Tỷ lệ nợ/thu nhập (khoản vay hiện tại) |
-| `TotalDebtToIncomeRatio` | FLOAT | Tổng tỷ lệ nợ/thu nhập (toàn bộ các khoản nợ) |
-| `BankruptcyHistory` | INT | Lịch sử phá sản (0 = Không, 1 = Có) |
-| `PreviousLoanDefaults` | INT | Số lần vỡ nợ trước đây |
-| `SavingsAccountBalance` | INT | Số dư tài khoản tiết kiệm (USD) |
-| `TotalAssets` | INT | Tổng tài sản (USD) |
-| `TotalLiabilities` | INT | Tổng nợ phải trả (USD) |
-| `JobTenure` | INT | Số năm làm việc tại công ty hiện tại |
-| `NetWorth` | INT | Giá trị tài sản ròng (USD) |
-| `RiskScore` | FLOAT | Điểm rủi ro do hệ thống tính toán |
-| `LoanApproved` | INT | Kết quả phê duyệt (1 = Approved, 0 = Declined) |
+| `ApplicationDate` | DATE | Date the loan application was submitted |
+| `Age` | INT | Applicant age |
+| `AnnualIncome` | INT | Annual income (USD) |
+| `CreditScore` | INT | Credit score (403 to 750 and above) |
+| `EmploymentStatus` | VARCHAR | Employment status |
+| `EducationLevel` | VARCHAR | Education level |
+| `LoanAmount` | INT | Loan amount requested (USD) |
+| `LoanDuration` | INT | Loan term (months) |
+| `DebtToIncomeRatio` | FLOAT | Debt-to-income ratio for the current loan only |
+| `TotalDebtToIncomeRatio` | FLOAT | Total debt-to-income ratio across all existing debts |
+| `BankruptcyHistory` | INT | Bankruptcy history (0 = No, 1 = Yes) |
+| `PreviousLoanDefaults` | INT | Number of previous loan repayment failures |
+| `SavingsAccountBalance` | INT | Savings account balance (USD) |
+| `TotalAssets` | INT | Total assets (USD) |
+| `TotalLiabilities` | INT | Total liabilities (USD) |
+| `JobTenure` | INT | Years employed at current company |
+| `NetWorth` | INT | Net worth (USD) |
+| `RiskScore` | FLOAT | System-calculated risk score |
+| `LoanApproved` | INT | Loan approval outcome (1 = Approved, 0 = Declined) |
 
 ---
 
@@ -115,33 +116,33 @@ Raw Data
 
 ### Key Metrics
 
-| Metric | Giá trị | Ghi chú |
+| Metric | Value | Notes |
 |--------|---------|---------|
-| Total Applicants | 20,000 | Tổng hồ sơ trong dataset |
-| Approval Rate | 23.90% | Chỉ ~1 trong 4 hồ sơ được phê duyệt |
+| Total Applicants | 20,000 | Total applications in the dataset |
+| Approval Rate | 23.90% | Roughly 1 in 4 applications is approved |
 | Total Approved | 4,800 | |
 | Total Declined | 15,200 | |
-| YoY Approval Rate Change (avg) | −0.02% | Gần như phẳng — không có xu hướng rõ ràng |
+| YoY Approval Rate Change (avg) | −0.02% | Nearly flat, with no clear directional trend |
 
-### Approved vs. Declined — So sánh chỉ số tài chính
+### Approved vs. Declined — Financial Indicator Comparison
 
-| Chỉ số | Approved | Declined | Chênh lệch |
+| Indicator | Approved | Declined | Difference |
 |--------|----------|----------|-----------|
 | Avg Annual Income | $102,211 | $45,641 | **+$56,570** |
-| Avg Credit Score | 584.53 | 567.55 | +16.98 điểm |
-| Avg DTI | 28.57% | 28.57% | **0 — không có sự khác biệt** |
+| Avg Credit Score | 584.53 | 567.55 | +16.98 points |
+| Avg Debt-to-Income Ratio | 28.57% | 28.57% | **0, with no difference between groups** |
 
-### Credit Tier Classification & Approval Count
+### Credit Risk Tier Classification & Approval Count
 
-| Tier | Credit Score | Approved | Declined | Approval Rate (ước tính) |
+| Tier | Credit Score | Approved | Declined | Approval Rate (estimated) |
 |------|-------------|----------|----------|--------------------------|
-| Tier 1-2 \| Excellent | 622+ | 1,100 | 2,000 | ~35% |
-| Tier 3-4 \| Good | 570–621 | 2,000 | 6,200 | ~24% |
-| Tier 5-6 \| Fair | 545–569 | 700 | 4,100 | ~15% |
-| Tier 7-8 \| High Risk | 455–544 | 900 | 2,600 | ~26% |
-| Tier 9-10 \| Very Poor | 403–454 | 100 | 400 | ~20% |
+| Tier 1-2 (Excellent) | 622 and above | 1,100 | 2,000 | ~35% |
+| Tier 3-4 (Good) | 570–621 | 2,000 | 6,200 | ~24% |
+| Tier 5-6 (Fair) | 545–569 | 700 | 4,100 | ~15% |
+| Tier 7-8 (High Risk) | 455–544 | 900 | 2,600 | ~26% |
+| Tier 9-10 (Very Poor) | 403–454 | 100 | 400 | ~20% |
 
-### SQL — Query 1: Phân tích theo năm × Approval Status
+### SQL — Query 1: Analysis by Year and Approval Status
 
 ```sql
 SELECT
@@ -163,9 +164,9 @@ GROUP BY 1, 2
 ORDER BY 1;
 ```
 
-*Tạo bảng so sánh chỉ số tài chính theo từng năm và trạng thái phê duyệt — dữ liệu đầu vào chính để Power BI vẽ biểu đồ Risk Factors và YoY Trend.*
+*Produces a comparison table of financial indicators by year and approval status, serving as the primary input for the Risk Factors and YoY Trend pages in Power BI.*
 
-### SQL — Query 2: Phân tầng Credit Tier
+### SQL — Query 2: Credit Risk Tier Classification
 
 ```sql
 SELECT
@@ -185,51 +186,51 @@ GROUP BY 1
 ORDER BY MIN(CreditScore) DESC;
 ```
 
-*Phân nhóm hồ sơ theo Credit Score thành 5 tầng rủi ro — phục vụ trang Risk Factors trong dashboard.*
+*Groups applications into five credit risk tiers based on credit score, feeding the Risk Factors page in the dashboard.*
 
 ---
 
 ## 8. Key Insights
 
-### 💰 Thu nhập là yếu tố phân biệt mạnh nhất — không phải Credit Score
+### 💰 Income is the strongest differentiating factor, not credit score
 
-Nhóm Approved có thu nhập trung bình $102,211 — gấp hơn 2 lần nhóm Declined ($45,641). Trong khi đó, chênh lệch Credit Score chỉ là 17 điểm (584 vs 568) — quá nhỏ để giải thích Approval Rate chỉ đạt 23.9%. Điều này gợi ý mô hình phê duyệt đang ưu tiên **khả năng trả nợ dựa trên thu nhập** hơn là lịch sử tín dụng — một lựa chọn có thể có lý do chiến lược, nhưng cần được kiểm tra kỹ trước khi coi là chính sách tối ưu.
+Approved applicants have an average annual income of $102,211, more than twice the average of declined applicants at $45,641. Meanwhile, the credit score gap is only 17 points (584 vs. 568), which is too small to explain an approval rate of just 23.9%. This suggests the approval model is prioritizing **repayment capacity based on income** over credit history. That may be a deliberate strategic choice, but it warrants closer examination before being treated as an optimal policy.
 
-### 📉 DTI bằng nhau hoàn toàn giữa 2 nhóm — đây là tín hiệu cần điều tra, không phải kết luận
+### 📉 The identical debt-to-income ratio across both groups is a signal that requires investigation, not a conclusion
 
-Avg DTI của cả Approved lẫn Declined đều là 28.57% — không có bất kỳ sự khác biệt nào. DTI thường được coi là chỉ số thẩm định tín dụng quan trọng, vì vậy kết quả này bất thường và có hai cách giải thích: (1) mô hình phê duyệt thực sự không dùng DTI làm điều kiện lọc, hoặc (2) có vấn đề trong cách tính `TotalDebtToIncomeRatio` trong dataset. Cần xác minh trước khi rút ra kết luận về vai trò của DTI.
+The average debt-to-income ratio for both approved and declined applicants is exactly 28.57%, with no difference whatsoever. Debt-to-income ratio is widely regarded as a key credit assessment indicator, so this result is unusual and has two possible explanations: either the approval model genuinely does not use debt-to-income ratio as a filtering condition, or there is an issue with how `TotalDebtToIncomeRatio` is calculated in the dataset. This must be verified before drawing any conclusions about the role of debt-to-income ratio.
 
-### 🏆 Ngay cả nhóm Excellent Credit (622+) vẫn bị từ chối nhiều hơn được duyệt
+### 🏆 Even applicants in the Excellent credit tier (622 and above) are declined more often than they are approved
 
-Tier Excellent (622+) có 1,100 Approved nhưng 2,000 Declined — Approval Rate chỉ khoảng 35% dù có Credit Score cao nhất. Điều này xác nhận Credit Score không phải điều kiện đủ: hồ sơ có lịch sử tín dụng tốt nhưng thu nhập chưa đạt ngưỡng vẫn bị từ chối với tỷ lệ cao. **Thu nhập quan trọng hơn Credit Tier.**
+The Excellent tier (622 and above) has 1,100 approved applicants but 2,000 declined ones, giving an approval rate of only around 35% despite having the highest credit scores. This confirms that credit score is not a sufficient condition: applicants with a strong credit history but income below the threshold are still declined at a high rate. **Income matters more than credit risk tier.**
 
-### 📊 Approval Rate dao động lớn nhưng không theo xu hướng rõ ràng
+### 📊 Approval rate fluctuates significantly but shows no clear directional trend
 
-Approval Rate biến động từ ~19% (thấp nhất) đến ~31% (đỉnh năm 2055), với YoY Change trung bình −0.02%. Không có xu hướng tăng hoặc giảm bền vững. Điều này có thể phản ánh: chính sách tín dụng thay đổi theo chu kỳ, hoặc các yếu tố vĩ mô chưa được ghi nhận trong dataset hiện tại.
+The loan approval rate ranges from approximately 19% at its lowest to approximately 31% at its peak in 2055, with an average year-over-year change of just −0.02%. There is no sustained upward or downward trend. This may reflect cyclical credit policy changes or macroeconomic factors not captured in the current dataset.
 
-### 📉 Tỷ lệ từ chối 76.1% đặt ra câu hỏi về false negatives
+### 📉 A 76.1% decline rate raises questions about creditworthy applicants who were incorrectly turned away
 
-Với 15,200/20,000 hồ sơ bị Declined, câu hỏi quan trọng là: trong số đó có bao nhiêu hồ sơ thực ra có khả năng trả nợ tốt nhưng bị loại vì thu nhập thấp hơn ngưỡng? Dataset hiện tại không có outcome thực (vỡ nợ hay trả đủ), nên chưa thể đánh giá độ chính xác của mô hình phê duyệt.
+With 15,200 out of 20,000 applications declined, an important question is how many of those applicants were actually capable of repaying but were rejected due to income falling below the threshold. The current dataset does not include actual loan outcomes (whether borrowers repaid or defaulted), so it is not possible to evaluate the accuracy of the approval model.
 
 ---
 
 ## 9. Recommendations
 
-**1. Kiểm tra lại vai trò của thu nhập trong mô hình phê duyệt**
+**1. Re-examine the role of income in the approval model**
 
-Chênh lệch thu nhập $56K giữa 2 nhóm cho thấy income đang chiếm vai trò áp đảo trong quyết định phê duyệt. Đội Risk Management nên xem xét liệu mô hình hiện tại có đang bỏ qua các tín hiệu tích cực khác không — ví dụ: lịch sử thanh toán sạch, số dư tiết kiệm cao, thâm niên làm việc dài. Mục tiêu: giảm false negative rate 5–10% trong nhóm thu nhập $40K–$70K có lịch sử thanh toán tốt (0 defaults), mà không làm tăng default rate. *[Đội Risk Management & Credit Policy]*
+The $56K income gap between the two groups suggests that income is playing a dominant role in approval decisions. The Risk Management team should assess whether the current model is overlooking other positive signals, such as a clean repayment history, a high savings account balance, or long job tenure. The goal is to reduce the rate of creditworthy applicants incorrectly declined by 5 to 10% within the $40K to $70K income band with zero previous defaults, without increasing the loan repayment failure rate. *[Risk Management and Credit Policy team]*
 
-**2. Điều tra nguyên nhân DTI không phân biệt được 2 nhóm**
+**2. Investigate why debt-to-income ratio does not differentiate the two groups**
 
-Avg DTI = 28.57% ở cả 2 nhóm là bất thường và cần được xác minh trước khi sử dụng chỉ số này trong bất kỳ mô hình nào. Đội Data cần kiểm tra: cách tính `TotalDebtToIncomeRatio`, liệu có truncation hoặc normalization nào đã được áp dụng trong dataset gốc không, và DTI có thực sự được dùng trong logic phê duyệt hay không. *[Đội Data Engineering]*
+An average debt-to-income ratio of 28.57% in both groups is unusual and needs to be verified before this indicator is used in any model. The Data team should check how `TotalDebtToIncomeRatio` is calculated, whether any truncation or normalization was applied in the original dataset, and whether debt-to-income ratio is actually used in the approval logic at all. *[Data Engineering team]*
 
-**3. Thiết lập chính sách riêng theo Credit Tier thay vì áp dụng một ngưỡng chung**
+**3. Establish tier-specific lending policies rather than applying a single universal threshold**
 
-Thay vì một ngưỡng thu nhập áp dụng đồng đều cho tất cả, xem xét tiêu chí phân tầng: Tier 1-2 (Excellent, 622+) có thể được nới lỏng yêu cầu thu nhập tối thiểu do rủi ro tín dụng thấp hơn; Tier 7-8 (High Risk) cần yêu cầu tài sản đảm bảo hoặc co-signer. Thành công đo bằng: Approval Rate nhóm Excellent tăng từ ~35% lên ~45% mà không làm tăng default rate trong nhóm này. *[Đội Credit Policy]*
+Instead of one income threshold applied uniformly to all applicants, consider a tiered approach: Tier 1-2 (Excellent, 622 and above) could have a relaxed minimum income requirement given the lower credit risk, while Tier 7-8 (High Risk) should require collateral or a co-signer. Success would be measured by the approval rate for Excellent-tier applicants increasing from approximately 35% to approximately 45%, without a corresponding increase in loan repayment failures within that group. *[Credit Policy team]*
 
-**4. Phân tích sâu các năm có Approval Rate đột biến**
+**4. Investigate the years with the most significant approval rate spikes**
 
-Năm 2055 có Approval Rate cao nhất (~31%) và một số năm xuống dưới 20% — khoảng cách 12 điểm phần trăm trong cùng một dataset là đáng kể. Cần xác định nguyên nhân (thay đổi chính sách nội bộ, điều kiện kinh tế mô phỏng, thay đổi trong phân phối hồ sơ?) để rút ra bài học cho chu kỳ tiếp theo. *[Đội Strategy & Planning]*
+The year 2055 has the highest approval rate at approximately 31%, while several years fall below 20%, a gap of 12 percentage points within the same dataset that is worth examining. Identifying the cause (internal policy changes, simulated economic conditions, or shifts in the application mix) would provide useful lessons for future planning cycles. *[Strategy and Planning team]*
 
 ---
 
@@ -237,48 +238,49 @@ Năm 2055 có Approval Rate cao nhất (~31%) và một số năm xuống dướ
 
 **Assumptions:**
 
-- Dataset là tổng hợp (Kaggle) — các pattern được tạo ra bởi thuật toán mô phỏng và có thể không phản ánh đầy đủ thực tế thị trường tín dụng, đặc biệt về mối quan hệ phi tuyến giữa các biến
-- `LoanApproved = 1` là Approved, `= 0` là Declined — không có trạng thái trung gian (pending, withdrawn, conditional approval)
-- Các ngưỡng Credit Tier (622, 570, 545, 455, 403) được định nghĩa cho mục đích phân tích của project này, không theo chuẩn FICO chính thức
+- The dataset is synthetic and sourced from Kaggle. The patterns are generated by a simulation algorithm and may not fully reflect real-world credit market dynamics, particularly with regard to non-linear relationships between variables.
+- `LoanApproved = 1` indicates an approved application and `= 0` indicates a declined one. There are no intermediate states such as pending, withdrawn, or conditional approval.
+- The credit risk tier thresholds (622, 570, 545, 455, and 403) are defined for the purposes of this project and do not follow the official FICO scoring standard.
 
 **Limitations:**
 
-- **Không có loan outcome thực:** Dataset không theo dõi việc người vay có trả được nợ không sau khi được duyệt — vì vậy không thể đánh giá chất lượng mô hình phê duyệt (precision/recall trên bad loans)
-- **SQL chỉ tính average:** Các query hiện tại chỉ tính mean — không phản ánh được phân phối thực sự (outliers, độ lệch) của income, Credit Score và các biến tài chính khác
-- **DTI anomaly chưa được giải thích:** DTI bằng nhau giữa 2 nhóm cần xác minh chất lượng dữ liệu trước khi kết luận
-- **Không có thông tin địa lý:** Không thể phân tích theo khu vực, tiểu bang, hay điều kiện thị trường địa phương
-- **Thời gian dữ liệu kéo đến 2072:** Dataset mô phỏng nhiều thập kỷ trong tương lai — không phải dự báo thực tế, và các pattern có thể không nhất quán với hành vi tín dụng trong thực tế
+- **No actual loan outcome data available:** The dataset does not track whether approved borrowers successfully repaid their loans, so it is not possible to evaluate the quality of the approval model in terms of precision or recall against actual loan repayment failures.
+- **SQL calculates averages only:** The current queries compute means only and do not reflect the actual distribution (including outliers and skew) of income, credit score, and other financial variables.
+- **Debt-to-income ratio anomaly remains unexplained:** The identical ratio across both groups requires data quality verification before any conclusion can be drawn.
+- **No geographic information available:** It is not possible to analyze results by region, state, or local market conditions.
+- **Data extends to 2072:** The dataset simulates multiple decades into the future, which is not a real forecast. Patterns may not be consistent with actual credit behavior in practice.
 
 ---
 
 ## 11. Future Enhancements
 
-- Bổ sung phân tích phân phối (histogram, boxplot) cho Income và Credit Score theo từng Tier để xem outlier ảnh hưởng thế nào đến average
-- Xây dựng mô hình Logistic Regression để dự đoán `LoanApproved` và đo feature importance — kiểm tra lại xem income có thực sự là top predictor không
-- Phân tích hành vi thanh toán theo Tier nếu có thêm dữ liệu outcome (default rate by tier)
-- Bổ sung phân tích theo `EmploymentStatus` và `EducationLevel` để kiểm tra bias tiềm ẩn trong mô hình phê duyệt
+- Add distribution analysis (histograms and boxplots) for income and credit score by tier to understand how outliers affect the averages
+- Build a logistic regression model to predict `LoanApproved` and measure feature importance, to validate whether income is genuinely the top predictor
+- Analyze repayment behavior by tier if additional outcome data becomes available (for example, loan repayment failure rate by tier)
+- Add analysis by `EmploymentStatus` and `EducationLevel` to check for potential bias in the approval model
 
 ---
 
 ## 12. Deliverables
 
-- ✅ `queries/loan_analysis.sql` — Toàn bộ queries: phân tích theo năm × approval status, phân tầng Credit Tier
-- ✅  Dataset gốc: `Loan.csv` (20,000 bản ghi, 36 cột) — tải tại [Kaggle](https://www.kaggle.com/datasets/lorenzozoppelletto/financial-risk-for-loan-approval)
-- ✅ `reports/Drivers_of_financial_risk.pdf` — Export Power BI dashboard (3 trang)
-- ✅ `README.md` — Tài liệu project đầy đủ
+- ✅ `queries/loan_analysis.sql` — All queries: analysis by year combined with approval status, and credit risk tier classification
+- ✅ Original dataset: `Loan.csv` (20,000 records, 36 columns), available at [Kaggle](https://www.kaggle.com/datasets/lorenzozoppelletto/financial-risk-for-loan-approval)
+- ✅ `reports/Drivers_of_financial_risk.pdf` — Power BI dashboard export (3 pages)
+- ✅ `README.md` — Full project documentation
+
 ---
 
 ## 13. Dashboard Preview
 
-### Trang 1 — Summary
+### Page 1 — Summary
 
 ![Summary](visuals/dashboard_summary.png)
 
-### Trang 2 — Risk Factors
+### Page 2 — Risk Factors
 
 ![Risk Factors](visuals/dashboard_risk_factors.png)
 
-### Trang 3 — YoY Trend
+### Page 3 — YoY Trend
 
 ![YoY Trend](visuals/dashboard_yoy_trend.png)
 
